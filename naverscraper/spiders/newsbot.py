@@ -11,8 +11,8 @@ class NewsbotSpider(scrapy.Spider):
         ranks = response.xpath('//*[@id="contentarea"]/div[3]/table/tr/td[1]/text()').extract()
         titles = response.xpath('//*[@id="contentarea"]/div[3]/table/tr/td[2]/a/text()').extract()
         prices = response.xpath('//*[@id="contentarea"]/div[3]/table/tr/td[3]/text()').extract()
-        ratios_updowns = response.xpath('//*[@id="contentarea"]/div[3]/table/tr/td[4]/img/@alt').extract()
-        ratios = response.xpath('//*[@id="contentarea"]/div[3]/table/tr/td[4]/span/text()').extract()
+        # ratios_updowns = response.xpath('//*[@id="contentarea"]/div[3]/table/tr/td[4]/img/@alt').extract()
+        # ratios = response.xpath('//*[@id="contentarea"]/div[3]/table/tr/td[4]/span/text()').extract()
         lows = response.xpath('//*[@id="contentarea"]/div[3]/table/tr/td[5]/span/text()').extract()
         volumes = response.xpath('//*[@id="contentarea"]/div[3]/table/tr/td[6]/text()').extract()
         payments = response.xpath('//*[@id="contentarea"]/div[3]/table/tr/td[7]/text()').extract()
@@ -31,8 +31,8 @@ class NewsbotSpider(scrapy.Spider):
             item['stock_rank'] = ranks[idx]
             item['title'] = titles[idx]
             item['price'] = prices[idx]
-            item['ratio_updown'] = ratios_updowns[idx]
-            item['ratio'] = ratios[idx].strip()
+            # item['ratio_updown'] = float(lows[idx].strip()[1:len(lows[idx].strip())-1])*intprices[idx].strip().replace(',',''))
+            # item['ratio'] = ratios[idx].strip()
             item['low'] = lows[idx].strip()
             item['volume'] = volumes[idx]
             item['payment'] = payments[idx]
