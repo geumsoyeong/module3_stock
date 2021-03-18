@@ -16,10 +16,10 @@ class NaverscraperPipeline(object):
     def process_item(self, item, spider):
         item = dict(item)
 
-        data = {"schema":{"type":"struct","fields":[{"type":"int32","optional":False,"field":"id"},{"type":"string","optional":False,"field":"stock_rank"},{"type":"string","optional":False,"field":"title"},{"type":"string","optional":False,"field":"price"},{"type":"string","optional":False,"field":"low"},{"type":"string","optional":False,"field":"volume"},{"type":"string","optional":False,"field":"payment"},{"type":"string","optional":False,"field":"buy"},{"type":"string","optional":False,"field":"sell"},{"type":"string","optional":False,"field":"capitalization"},{"type":"string","optional":False,"field":"per"},{"type":"string","optional":False,"field":"roe"},{"type":"int64","optional":True,"name":"org.apache.kafka.connect.data.Timestamp","version":1,"field":"created_at"}],"optional":False,"name":"stock"},"payload":{"id":1,"stock_rank":item['stock_rank'],"title":item['title'],"price":item['price'],"low":item['low'],"volume":item['volume'],"payment":item['payment'],"buy":item['buy'],"sell":item['sell'],"capitalization":item['capitalization'],"per":item['per'],"roe":item['roe'],"created_at":int(time.time()*1000)}}
+        data = {"schema":{"type":"struct","fields":[{"type":"int32","optional":False,"field":"id"},{"type":"string","optional":False,"field":"stock_rank"},{"type":"string","optional":False,"field":"title"},{"type":"int32","optional":False,"field":"price"},{"type":"string","optional":False,"field":"low"},{"type":"int32","optional":False,"field":"volume"},{"type":"int32","optional":False,"field":"payment"},{"type":"int32","optional":False,"field":"buy"},{"type":"int32","optional":False,"field":"sell"},{"type":"string","optional":False,"field":"capitalization"},{"type":"string","optional":False,"field":"per"},{"type":"string","optional":False,"field":"roe"},{"type":"int64","optional":True,"name":"org.apache.kafka.connect.data.Timestamp","version":1,"field":"created_at"}],"optional":False,"name":"stock"},"payload":{"id":1,"stock_rank":item['stock_rank'],"title":item['title'],"price":item['price'],"low":item['low'],"volume":item['volume'],"payment":item['payment'],"buy":item['buy'],"sell":item['sell'],"capitalization":item['capitalization'],"per":item['per'],"roe":item['roe'],"created_at":int(time.time()*1000)}}
 
 
-        self.producer.send('topic_stock', value = data)
+        self.producer.send('my_topic_stock', value = data)
         time.sleep(10)
         self.producer.flush()
         print('Done:')
